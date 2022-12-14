@@ -16,7 +16,6 @@ Implement the functions for the four requirement specifications.
 """
 Function 1: Get the information in MRZ as two strings     
 Input: Scanned MRZ lines (string)
-Author: Vaibhav
 
 *** this one uses pass since it is an empty func
 """
@@ -28,57 +27,16 @@ def scanMRZ():
 Function 2: Decode the MRZ's two strings and cacluate check digits   
 Input: Scanned MRZ lines (string) 
 Output: Decoded info (list), Check Digit (int)
-Author: Mikayla
+
 """
 def decodeMRZ():
-      
-      dictionary_fields = {
-        "type_of_passport": "",
-        "issuing_country": "",
-        "first_name": "",
-        "last_name": "",
-        "middle_name": "",
-        "birthdate": "",
-        "gender": "",
-        "expiration": "",
-        "passport_number": "",
-        "personal_number": "",
-        "check_digit_one": "",
-        "check_digit_two": "",
-        "check_digit_three": "",
-        "check_digit_four": ""
-    }
-
-    string_one = list(MRZ_string.split(";"))[0]
-    string_two = list(MRZ_string.split(";"))[1]
-    string_one_list = list(filter(None, list(string_one.split("<"))))
-
-    # extract fields here
-    dict_fields["type_of_passport"] = string_one_list[0]
-    dict_fields["last_name"] = string_one_list[1][3::]
-    dict_fields["first_name"] = string_one_list[2]
-    if (len(string_one_list) > 3):
-        dict_fields["middle_name"] = string_one_list[3]
-    dict_fields["passport_number"] = string_two[0:9]
-    dict_fields["check_digit_one"] = string_two[9]
-    dict_fields["issuing_country"] = string_two[10:13]
-    dict_fields["birthdate"] = string_two[13:19]
-    dict_fields["check_digit_two"] = string_two[19]
-    dict_fields["gender"] = string_two[20]
-    dict_fields["expiration"] = string_two[21:27]
-    dict_fields["check_digit_three"] = string_two[27]
-    dict_fields["personal_number"] = string_two[28:37]
-    dict_fields["check_digit_four"] = string_two[43]
-
-    return dict_fields
-      return()
+      pass
 
 """
 Function 3: Encode travel information fields queried from a database into the two strings for the MRZ
 Input: Decoded info (string) 
-Output: Encoded info (list)
-Author:
-"""
+Output: Encoded info (list) """
+
 def encodeMRZ():
       
       return()
