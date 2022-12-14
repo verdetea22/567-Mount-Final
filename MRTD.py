@@ -64,8 +64,13 @@ def decodeMRZ(MRZ_s):
             "checkdigit4": "",  
       }
       
+      # seperate travel info into two seperate variables
       first_line = list(MRZ_s.split("+"))[0]
       second_line = list(MRZ_s.split("+"))[1]
+      
+      # create lists, filter out "<" characters 
+      first_line_list = list(filter(None, list(first_line.split("<"))))
+      second_line_list = list(filter(None, list(second_line.split("<"))))
       
 
 """
