@@ -38,6 +38,7 @@ Output: Decoded info (list), Check Digit (int)
 """
 def decodeMRZ(MRZ_s):
       
+      #dictionary of all fields on travel document
       info_fields = {
             
       #line one
@@ -72,6 +73,14 @@ def decodeMRZ(MRZ_s):
       first_line_list = list(filter(None, list(first_line.split("<"))))
       second_line_list = list(filter(None, list(second_line.split("<"))))
       
+      #populate lists with information // first string
+      info_fields["document_type"] = first_line_list[0]
+      info_fields["last_name"]= first_line_list[1][3::]
+      info_fields["first_name"] = first_line_list[2]
+      info_fields["middle_name"] = first_line_list[3]
+      
+      #populate lists with information // second string
+      info_fields["passport_number"] = second_line_list[0:9]
 
 """
 Function 3: Encode travel information fields queried from a database into the two strings for the MRZ
