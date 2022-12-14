@@ -19,9 +19,9 @@ Input: Scanned MRZ lines (string)
 """
 def scanMRZ():
       
-      #first_string = ""
-      #second_string = ""
-      #return first_string + "/" + second_string
+      #first_line = ""
+      #second_line = ""
+      #return ( first_line + "+" + second_line )
       
       #reads the document, scans the two lines of information
       def scan(MRZ):
@@ -36,7 +36,7 @@ Input: Scanned MRZ lines (string)
 Output: Decoded info (list), Check Digit (int)
 
 """
-def decodeMRZ():
+def decodeMRZ(MRZ_s):
       
       info_fields = {
             
@@ -61,8 +61,12 @@ def decodeMRZ():
             "checkdigit1": "",
             "checkdigit2": "",
             "checkdigit3": "",
-            "checkdigit4": ""  
+            "checkdigit4": "",  
       }
+      
+      first_line = list(MRZ_s.split("+"))[0]
+      second_line = list(MRZ_s.split("+"))[1]
+      
 
 """
 Function 3: Encode travel information fields queried from a database into the two strings for the MRZ
