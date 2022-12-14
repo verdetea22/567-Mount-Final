@@ -1,6 +1,6 @@
 """
-567 A/AU Group 4 Final
-Mikayla Mount, 
+567 A/AU Final
+Mikayla Mount
 Dr Bondi
 
 I pledge my Honor that I have abided by the Stevens Honor System. 
@@ -16,12 +16,19 @@ Implement the functions for the four requirement specifications.
 """
 Function 1: Get the information in MRZ as two strings     
 Input: Scanned MRZ lines (string)
-
-*** this one uses pass since it is an empty func
 """
 def scanMRZ():
       
-      pass
+      #first_string = ""
+      #second_string = ""
+      #return first_string + "/" + second_string
+      
+      #reads the document, scans the two lines of information
+      def scan(MRZ):
+            return "travel information"
+      
+      return scan(MRZ=any)
+
 
 """
 Function 2: Decode the MRZ's two strings and cacluate check digits   
@@ -30,7 +37,32 @@ Output: Decoded info (list), Check Digit (int)
 
 """
 def decodeMRZ():
-      pass
+      
+      info_fields = {
+            
+      #line one
+            "document_type": "",
+            "issuing_country": "",
+            "first_name": "",
+            "middle_name": "",
+            "last_name": "",
+            
+      #line two
+            "passport_num": "",
+            "country_code": "",
+            #YYMMDD
+            "birth_date": "",
+            "sex": "",
+            #YYMMDD
+            "expiration_date": "",
+            "personal_number": "",
+            
+      #check digits
+            "checkdigit1": "",
+            "checkdigit2": "",
+            "checkdigit3": "",
+            "checkdigit4": ""  
+      }
 
 """
 Function 3: Encode travel information fields queried from a database into the two strings for the MRZ
