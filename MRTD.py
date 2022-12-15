@@ -14,8 +14,9 @@ Implement the functions for the four requirement specifications.
 """
 
 """
-Function 1: Get the information in MRZ as two strings     
-Input: Scanned MRZ lines (string)
+Function 1: Get the information in MRZ as one string     
+Input: No input
+Return: string of both lines (string)
 """
 def scanMRZ():
       
@@ -31,10 +32,9 @@ def scanMRZ():
 
 
 """
-Function 2: Decode the MRZ's two strings and cacluate check digits   
+Function 2: Decode the MRTD's two strings and format    
 Input: Scanned MRZ lines (string) 
 Output: dictionary of data types 
-
 """
 def decodeMRZ(MRZ_s):
       
@@ -95,13 +95,13 @@ def decodeMRZ(MRZ_s):
       
 
 """
-Function 3: Encode travel information fields queried from a database into the two strings for the MRZ
+Function 3: Encode travel information fields queried from a database into the two strings for the MRZ, check digit calc
 Input: Identifier (string) 
 Output: Encoded info (list) """
 
 string_len = 44
 
-def encodeMRTD(passport_number):
+def encode(passport_number):
       
       #calling method to retrive travel info
       issuing_country, first_name, last_name, middle_name,birth_date, sex, expiration_date, personal_number = getMRTDInfo(passport_number) 
@@ -183,7 +183,7 @@ Author:
 def errorMRZ(MRZ_string, issuing_country, first_name, last_name, middle_name, birth_date, sex, expiration_date, passport_number, personal_number):
       
       #encode info to get expected result
-      encode_result = encodeMRTD(issuing_country, first_name, last_name, middle_name, birth_date, sex, expiration_date, passport_number, personal_number)
+      encode_result = encodeData(issuing_country, first_name, last_name, middle_name, birth_date, sex, expiration_date, passport_number, personal_number)
       
       #return message if no error
       error_message = "Passed: No mismatches"

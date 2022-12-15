@@ -31,7 +31,7 @@ class TestMRTD(unittest.TestCase):
       Testing Function 2: Decode the MRZ's two strings and cacluate check digits   
       Input: Scanned MRTD information (elements in list) 
       """
-      def testDecodeMRZ():
+      def testDecodeMRZ(self):
             testString = "P<UTOERIKSSON<<ANNA<MARIA<<<<<<<<<<<<<<<<<<<;L898902C36UTO7408122F1204159ZE184226B<<<<<<1"
             self.assertEqual(decodeMRZ(testString).get("document_type"), "P")
             self.assertEqual(decodeMRZ(testString).get("issuing_country"), "UTO")
@@ -92,6 +92,7 @@ class TestMRTD(unittest.TestCase):
       #Test encode functionality with given passport number
       @patch('MRTD.getMRTDInfo')
       def testEncode(self, mock_get_MRTDInfo):
+            # issuing_country, first_name, last_name, middle_name,birth_date, sex, expiration_date, personal_number
             data = "UTO", "ANNA", "ERIKSSON", "MARIA", "740812", "F", "120415", "ZE184226B"
             mock_get_MRTDInfo.return_value = data
 
