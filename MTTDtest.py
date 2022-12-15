@@ -14,7 +14,6 @@ class TestMRTD(unittest.TestCase):
 
       """
       Testing Function 1: Get the information in MRZ as two strings 
-      Input: Scanned MRZ lines (string) 
       """
       @patch('MRTD.scan')
       
@@ -29,7 +28,6 @@ class TestMRTD(unittest.TestCase):
       
       """
       Testing Function 2: Decode the MRZ's two strings and cacluate check digits   
-      Input: Scanned MRTD information (elements in list) 
       """
       def testDecodeMRZ(self):
             testString = "P<UTOERIKSSON<<ANNA<MARIA<<<<<<<<<<<<<<<<<<<;L898902C36UTO7408122F1204159ZE184226B<<<<<<1"
@@ -54,8 +52,6 @@ class TestMRTD(unittest.TestCase):
       
       """
       Testing Function 3: Encode travel information fields queried from a database into the two strings for the MRZ
-      Input: Decoded info (string), Encoded info (string) 
-      Output: Validation (boolean) 
       """
       #Test find check digit based on typical value
       def testsFindCheckDigit(self):
@@ -97,14 +93,12 @@ class TestMRTD(unittest.TestCase):
             mock_get_MRTDInfo.return_value = data
 
             self.assertEqual(
-                  "P<UTOERIKSSON<<ANNA<MARIA<<<<<<<<<<<<<<<<<<<\nL898902C36UTO7408122F1204159ZE184226B<<<<<<1", encodeMRTD("L898902C3"))
+                  "P<UTOERIKSSON<<ANNA<MARIA<<<<<<<<<<<<<<<<<<<\nL898902C36UTO7408122F1204159ZE184226B<<<<<<1", encodeData("L898902C3"))
             
             return()
       
       """
       Function 4: report a mismatch between certain information fields and the check digit. The system shall report where error occured relative to check digit
-      Input: Scanned MRZ lines (string), Mismatched info (string) 
-      Output:  Validation (boolean) 
       """
       def nonError(self):
             
