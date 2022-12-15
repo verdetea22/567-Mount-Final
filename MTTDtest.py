@@ -105,7 +105,24 @@ class TestMRTD(unittest.TestCase):
       Input: Scanned MRZ lines (string), Mismatched info (string) 
       Output:  Validation (boolean) 
       """
-      def testErrorMRZ():
+      def nonError(self):
+            
+            # Testing with accuracte credentials 
+            self.assertEqual(errorMRZ("P<NICLOUGHLIN<<PERCY<ANDREW<<<<<<<<<<<<<<<<<\n5986721677NIC0108168M2401014TR913125H<<<<<<6",
+            "NIC", "PERCY", "LOUGHLIN", "ANDREW", "010816", "M", "240101", "598672167", "TR913125H"), "No mismatches found")
+        
+      
+      def testErrorMRZ(self):
+            
+            #Testing with incorrect final check digit
+            self.assertEqual(errorMRZ("P<NICLsOUGHLIN<<PERCY<ANDREW<<<<<<<<<<<<<<<<<\n5986721677NIC0108168M2401014TR913125H<<<<<<8",
+            "NIC", "PERCY", "LOUGHLIN", "ANDREW", "010816", "M", "240101", "598672167", "TR913125H"),
+             "Errors found in: " + "\nPersonal number " + "6" + " != " + "8")
+            
+             #testing with incorrect expiration date check digit
+            self.assertEqual(errorMRZ("P<NICLOUGHLIN<<PERCY<ANDREW<<<<<<<<<<<<<<<<<\n5986721677NIC0108168M2401015TR913125H<<<<<<6",
+            "NIC", "PERCY", "LOUGHLIN", "ANDREW", "010816", "M", "240101", "598672167", "TR913125H"),
+            "Errors found in: " + "\nExpiration date " + "4" + " != " + "5")
             
             return()  
 
