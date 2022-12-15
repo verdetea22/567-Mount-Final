@@ -180,6 +180,20 @@ Input: Scanned MRZ lines (string),
 Output: Mismatched info (string)
 Author:
 """
-def errorMRZ():
+def errorMRZ(MRZ_string, issuing_country, first_name, last_name, middle_name, birth_date, sex, expiration_date, passport_number, personal_number):
       
+      #encode info to get expected result
+      encode_result = encodeMRTD(issuing_country, first_name, last_name, middle_name, birth_date, sex, expiration_date, passport_number, personal_number)
+      
+      #return message if no error
+      error_message = "Passed: No mismatches"
+      
+      #checks if there is any error, if not return no mismatch
+      if MRZ_string == encode_result:
+            return error_message
+      
+      #checks if there is any error, if there return mismatch
+      
+
+
       return()
