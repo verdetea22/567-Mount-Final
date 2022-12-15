@@ -99,6 +99,8 @@ Function 3: Encode travel information fields queried from a database into the tw
 Input: Identifier (string) 
 Output: Encoded info (list) """
 
+string_len = 44
+
 def encodeMRTD(passport_number):
       
       #calling method to retrive travel info
@@ -133,7 +135,7 @@ def calcAlphaNum(character):
 # Check Digit = sum of products, divison by modulus 
 def calcCheckDigit(name):
     arr = list(str(name))
-    weights = getWeightArr(len(arr))
+    weights = digitWeight(len(arr))
     products = []
     for i in range(len(arr)):
         products.append(weights[i] * calcAlphaNum(arr[i]))
@@ -141,7 +143,7 @@ def calcCheckDigit(name):
     return str(sum(products) % 10)
 
 # Weighting sequence (use 7,3,1)
-def getWeightArr(length):
+def digitWeight(length):
     amt = (length // 3) + 1
     arr = amt * [7, 3, 1]
     return arr[:length]
@@ -149,29 +151,29 @@ def getWeightArr(length):
 
 def encodeData(issuing_country, first_name, last_name, middle_name, birthdate, gender, expiration, passport_number, personal_number):
 
-    # compiles string one
-    string_one = "P<" + issuing_country + last_name + \
+    # compiles first string 
+    first_string = "P<" + issuing_country + last_name + \
         "<<" + first_name + "<" + middle_name
-    if (len(string_one) < STRING_LENGTH):
-        string_one = padString(string_one, STRING_LENGTH)
+    if (len(first_string) < string_len):
+        first_string = padString(first_string, string_len)
 
     if (len(passport_number) < 9):
         passport_number = padString(passport_number, 9)
 
-    check_digit_one = calcCheckDigit(passport_number)
-    check_digit_two = calcCheckDigit(birthdate)
-    check_digit_three = calcCheckDigit(expiration)
-    check_digit_four = calcCheckDigit(personal_number)
+    checkdigit1 = calcCheckDigit(passport_number)
+    checkdigit2 = calcCheckDigit(birthdate)
+    checkdigit3 = calcCheckDigit(expiration)
+    checkdigit4 = calcCheckDigit(personal_number)
 
-    # compiles string two
-    string_two = passport_number + check_digit_one + issuing_country + birthdate + \
-        check_digit_two + gender + expiration + check_digit_three + personal_number
-    if (len(string_two) < STRING_LENGTH - 1):
-        string_two = padString(string_two, STRING_LENGTH - 1)
-    string_two = string_two + check_digit_four
+    # compiles second string 
+    second_string = passport_number + checkdigit1 + issuing_country + birthdate + \
+        checkdigit2 + gender + expiration + checkdigit3 + personal_number
+    if (len(second_string) < string_len - 1):
+        second_string = padString(second_string, string_len - 1)
+    second_string = second_string + checkdigit4
 
     # returns both strings
-    return string_one + "\n" + string_two
+    return first_string + "\n" + second_string
 """
 Function 4: report a mismatch between certain information fields and the check digit. The system shall report where error occured relative to check digit
 Input: Scanned MRZ lines (string),  
