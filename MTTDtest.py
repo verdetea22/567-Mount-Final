@@ -58,7 +58,7 @@ class TestMRTD(unittest.TestCase):
             st = "L898902C3"
             self.assertEqual(calcCheckDigit(st), "6")
 
-      #Tesst find check digit of a string of length 0
+      #Test find check digit of a string of length 0
       def testFindCheckDigitOfEmptryString(self):
             st = ""
             self.assertEqual(calcCheckDigit(st), "0")
