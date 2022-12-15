@@ -49,7 +49,7 @@ def decodeMRZ(MRZ_s):
             "last_name": "",
             
       #line two
-            "passport_num": "",
+            "passport_number": "",
             "country_code": "",
             #YYMMDD
             "birth_date": "",

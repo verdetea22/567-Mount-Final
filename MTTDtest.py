@@ -4,7 +4,6 @@ from MRTD import *
 from unittest.mock import patch
 
 
-
 class TestMRTD(unittest.TestCase):
       
       """
@@ -19,7 +18,8 @@ class TestMRTD(unittest.TestCase):
       Output: Validation (boolean)    
       """
       @patch('MRTD.scan')
-      def testScanMRZ():
+      
+      def testScanMRZ(self,mock_scan):
             
             data = "P<UTOERIKSSON<<ANNA<MARIA<<<<<<<<<<<<<<<<<<<\nL898902C36UTO7408122F1204159ZE184226B<<<<<<1"
             mock_scan.return_value = data
@@ -34,8 +34,24 @@ class TestMRTD(unittest.TestCase):
       Output: Validation (boolean) 
       """
       def testDecodeMRZ():
-            
-            return()
+            testString = "P<UTOERIKSSON<<ANNA<MARIA<<<<<<<<<<<<<<<<<<<;L898902C36UTO7408122F1204159ZE184226B<<<<<<1"
+            self.assertEqual(decodeMRZ(testString).get("document_type"), "P")
+            self.assertEqual(decodeMRZ(testString).get("issuing_country"), "UTO")
+            self.assertEqual(decodeMRZ(testString).get("first_name"), "ANNA")
+            self.assertEqual(decodeMRZ(testString).get("last_name"), "ERIKSSON")
+            self.assertEqual(decodeMRZ(testString).get("middle_name"), "MARIA")
+            self.assertEqual(decodeMRZ(testString).get("birth_date"), "740812")
+            self.assertEqual(decodeMRZ(testString).get("sex"), "F")
+            self.assertEqual(decodeMRZ(testString).get("expiration_date"), "120415")
+            self.assertEqual(decodeMRZ(testString).get(
+            "passport_number"), "L898902C3")
+            self.assertEqual(decodeMRZ(testString).get(
+            "personal_number"), "ZE184226B")
+            self.assertEqual(decodeMRZ(testString).get("checkdigit1"), "6")
+            self.assertEqual(decodeMRZ(testString).get("checkdigit2"), "2")
+            self.assertEqual(decodeMRZ(testString).get("checkdigit3"), "9")
+            self.assertEqual(decodeMRZ(testString).get("checkdigit4"), "1")
+
       
       """
       Testing Function 3: Encode travel information fields queried from a database into the two strings for the MRZ
