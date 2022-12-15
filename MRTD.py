@@ -84,6 +84,14 @@ def decodeMRZ(MRZ_s):
       info_fields["checkdigit1"] = second_line_list[9]
       info_fields["issuing_country"]= second_line_list[10:13]
       info_fields["birth_date"]= second_line_list[13:19]
+      info_fields["checkdigit2"] = second_line_list[19]
+      info_fields["sex"] = second_line_list[20]
+      info_fields["expiration_date"] = second_line_list[21:27]
+      info_fields["checkdigit3"] = second_line_list[27]
+      info_fields["personal_number"] = second_line_list[28:37]
+      info_fields["checkdigit4"] = second_line_list[43]
+      
+      return info_fields
       
 
 """
