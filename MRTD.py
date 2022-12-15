@@ -33,7 +33,7 @@ def scanMRZ():
 """
 Function 2: Decode the MRZ's two strings and cacluate check digits   
 Input: Scanned MRZ lines (string) 
-Output: Decoded info (list), Check Digit (int)
+Output: dictionary of data types 
 
 """
 def decodeMRZ(MRZ_s):
@@ -96,13 +96,21 @@ def decodeMRZ(MRZ_s):
 
 """
 Function 3: Encode travel information fields queried from a database into the two strings for the MRZ
-Input: Decoded info (string) 
+Input: Identifier (string) 
 Output: Encoded info (list) """
 
-def encodeMRZ():
+def encodeMRTD(passport_number):
       
-      return()
+      #calling method to retrive travel info
+      issuing_country, first_name, last_name, middle_name,birth_date, sex, expiration_date, personal_number = getMRTDInfo(passport_number) 
+      return encodeData(issuing_country, first_name, last_name, middle_name,birth_date, sex, expiration_date, personal_number)
 
+#getting info from database
+def encodeData(passport_number):
+      # first_line = [passport_number.type_of_passport, passport_number.issuing_country, passport_number.name]
+      # second_line = [passport_number.country_code, passport_number.birthdate, passport_number.gender, passport_number.expiration, passport_number]
+      # MRTD = [string_one, string_two]
+      print("Information regarding " + passport_number)
 """
 Function 4: report a mismatch between certain information fields and the check digit. The system shall report where error occured relative to check digit
 Input: Scanned MRZ lines (string),  
