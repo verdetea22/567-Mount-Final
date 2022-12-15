@@ -95,9 +95,9 @@ def decodeMRZ(MRZ_s):
       
 
 """
-Function 3: Encode travel information fields queried from a database into the two strings for the MRZ, check digit calc
+Function 3: Encode travel information fields queried from a database into the two strings for the MRTD, calculate check digits based on format
 Input: Identifier (string) 
-Output: Encoded info (list) """
+Output: Two encoded lines (string) """
 
 string_len = 44
 
