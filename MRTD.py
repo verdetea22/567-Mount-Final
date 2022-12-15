@@ -73,14 +73,18 @@ def decodeMRZ(MRZ_s):
       first_line_list = list(filter(None, list(first_line.split("<"))))
       second_line_list = list(filter(None, list(second_line.split("<"))))
       
-      #populate lists with information // first string
+      #populate first string list with information 
       info_fields["document_type"] = first_line_list[0]
       info_fields["last_name"]= first_line_list[1][3::]
       info_fields["first_name"] = first_line_list[2]
       info_fields["middle_name"] = first_line_list[3]
       
-      #populate lists with information // second string
+      #populate second list with information // checkdigits appear between every few fields
       info_fields["passport_number"] = second_line_list[0:9]
+      info_fields["checkdigit1"] = second_line_list[9]
+      info_fields["issuing_country"]= second_line_list[10:13]
+      info_fields["birth_date"]= second_line_list[13:19]
+      
 
 """
 Function 3: Encode travel information fields queried from a database into the two strings for the MRZ
