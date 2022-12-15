@@ -193,7 +193,24 @@ def errorMRZ(MRZ_string, issuing_country, first_name, last_name, middle_name, bi
             return error_message
       
       #checks if there is any error, if there return mismatch
-      
+      else:
+            error_message = "Error found: "
+            
+            #checks if general passport is formatted correctly
+            if len(MRZ_string) != len(encode_result):
+                  error_message  = "Passport ID length invalid"
+            
+            #checks for errors intermittenly at each checkdigit 
+            if MRZ_string[54] != encode_result[54]:
+                  error_message = error_message + "\nPassport number " + encode_result[54] + " != " + MRZ_string[54]
+            
+            if MRZ_string[64] != encode_result[64]:
+                  error_message = error_message + "\nBirth date " + encode_result[64] + " != " + MRZ_string[64]
+            
+            if MRZ_string[72] != encode_result[72]:
+                  error_message = error_message + "\nExpiration date " + encode_result[72] + " != " + MRZ_string[72]
+            
+            if MRZ_string[88] != encode_result[88]:
+                  error_message = error_message + "\nPersonal number " + encode_result[88] + " != " + MRZ_string[88]
 
-
-      return()
+      return error_message
