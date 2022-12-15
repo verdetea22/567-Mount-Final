@@ -22,11 +22,10 @@ class TestMRTD(unittest.TestCase):
       def testScanMRZ():
             
             data = "P<UTOERIKSSON<<ANNA<MARIA<<<<<<<<<<<<<<<<<<<\nL898902C36UTO7408122F1204159ZE184226B<<<<<<1"
-            mock_read_pic.return_value = data
+            mock_scan.return_value = data
 
-            self.assertEqual("P<UTOERIKSSON<<ANNA<MARIA<<<<<<<<<<<<<<<<<<<\nL898902C36UTO7408122F1204159ZE184226B<<<<<<1", scan())
+            self.assertEqual("P<UTOERIKSSON<<ANNA<MARIA<<<<<<<<<<<<<<<<<<<\nL898902C36UTO7408122F1204159ZE184226B<<<<<<1", scanMRZ())
 
-            
       
       
       """
