@@ -13,3 +13,31 @@ from MTTDtest import TestMRTD
 import time
 import csv 
 
+def testDecodeMRZ_perf(json_file): 
+    
+    # measure the execution times to process the first 100 records, the first 1000 records,
+    # and the first n thousand records for n running from 1 to 10.
+    n_value = [100, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000]
+    value = []
+
+    file = open(json_file)
+    encoded_data = json.load(file)
+
+    for input in range(len(n_value)): 
+        start = time.perf_counter()
+        for i in range(n_value[input]):
+            decodeMRZ(encoded_data['records_encoded'][i])
+        end = time.perf_counter()
+        no_test_time = end - start
+
+        start = time.perf_counter()
+        for i in range(n_value[input]):
+            decodeMRZ(encoded_data['records_encoded'][i])
+            TestMRTD()
+        end = time.perf_counter()
+        with_test_time = end - start
+
+        value.append([n_value[input], no_test_time, with_test_time])
+        
+
+    return value
