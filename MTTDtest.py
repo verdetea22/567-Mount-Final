@@ -98,11 +98,11 @@ class TestMRTD(unittest.TestCase):
             return()
       
       """
-      Function 4: report a mismatch between certain information fields and the check digit. The system shall report where error occured relative to check digit
+      Function 4: Report a mismatch between certain information fields and the check digit. The system shall report where error occured relative to check digit
       """
       def nonError(self):
             
-            # Testing with accuracte credentials 
+            # Testing with accurate credentials 
             self.assertEqual(errorMRZ("P<NICLOUGHLIN<<PERCY<ANDREW<<<<<<<<<<<<<<<<<\n5986721677NIC0108168M2401014TR913125H<<<<<<6",
             "NIC", "PERCY", "LOUGHLIN", "ANDREW", "010816", "M", "240101", "598672167", "TR913125H"), "No mismatches found")
         
@@ -114,7 +114,7 @@ class TestMRTD(unittest.TestCase):
             "NIC", "PERCY", "LOUGHLIN", "ANDREW", "010816", "M", "240101", "598672167", "TR913125H"),
              "Errors found in: " + "\nPersonal number " + "6" + " != " + "8")
             
-             #testing with incorrect expiration date check digit
+             #Testing with incorrect expiration date check digit
             self.assertEqual(errorMRZ("P<NICLOUGHLIN<<PERCY<ANDREW<<<<<<<<<<<<<<<<<\n5986721677NIC0108168M2401015TR913125H<<<<<<6",
             "NIC", "PERCY", "LOUGHLIN", "ANDREW", "010816", "M", "240101", "598672167", "TR913125H"),
             "Errors found in: " + "\nExpiration date " + "4" + " != " + "5")
