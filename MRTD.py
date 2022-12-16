@@ -105,7 +105,7 @@ def encode(passport_number):
       
       #calling method to retrive travel info
       issuing_country, first_name, last_name, middle_name,birth_date, sex, expiration_date, personal_number = getMRTDInfo(passport_number) 
-      return encodeData(issuing_country, first_name, last_name, middle_name,birth_date, sex, expiration_date, personal_number)
+      return encodeData(issuing_country, first_name, last_name, middle_name, birth_date, sex, expiration_date, passport_number, personal_number)
 
 
 #getting info from database
@@ -117,8 +117,8 @@ def getMRTDInfo(passport_number):
       
       
 # Formatting of document feild       
-def padString(string, intended_length):
-    while (len(string) < intended_length):
+def padString(string, expected_len):
+    while (len(string) < expected_len):
         string = string + "<"
     return string
 
@@ -149,7 +149,7 @@ def digitWeight(length):
     return arr[:length]
 
 
-def encodeData(issuing_country, first_name, last_name, middle_name, birthdate, gender, expiration, passport_number, personal_number):
+def encodeData(issuing_country, first_name, last_name, middle_name, birth_date, sex, expiration_date, passport_number, personal_number):
 
     # compiles first string 
     first_string = "P<" + issuing_country + last_name + \
@@ -161,13 +161,13 @@ def encodeData(issuing_country, first_name, last_name, middle_name, birthdate, g
         passport_number = padString(passport_number, 9)
 
     checkdigit1 = calcCheckDigit(passport_number)
-    checkdigit2 = calcCheckDigit(birthdate)
-    checkdigit3 = calcCheckDigit(expiration)
+    checkdigit2 = calcCheckDigit(birth_date)
+    checkdigit3 = calcCheckDigit(expiration_date)
     checkdigit4 = calcCheckDigit(personal_number)
 
     # compiles second string 
-    second_string = passport_number + checkdigit1 + issuing_country + birthdate + \
-        checkdigit2 + gender + expiration + checkdigit3 + personal_number
+    second_string = passport_number + checkdigit1 + issuing_country + birth_date + \
+        checkdigit2 + sex + expiration_date + checkdigit3 + personal_number
     if (len(second_string) < string_len - 1):
         second_string = padString(second_string, string_len - 1)
     second_string = second_string + checkdigit4
