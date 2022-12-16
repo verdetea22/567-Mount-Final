@@ -1,4 +1,3 @@
-
 """
 Using Python timing libraries:
     - use two .jsons measure the execution times to process a certain amount of records
@@ -45,12 +44,13 @@ def testDecodeMRZ_perf(json_file):
     # how many times it ran, time1, time
     return value
 
-
+# helper function for testDecodeMRZ_perf
 def encodeSequence(decoded_data, n_value, input, test = "None"):
     for i in range(n_value[input]):
         
             #following the format of the json file
             
+            #line one
             issuing_country = decoded_data['records_decoded'][i]["line1"]["issuing_country"]
             last_name = decoded_data['records_decoded'][i]["line1"]["last_name"]
             
@@ -61,6 +61,8 @@ def encodeSequence(decoded_data, n_value, input, test = "None"):
             else:
                 first_name = decoded_data['records_decoded'][i]["line1"]["given_name"]
                 middle_name = ""
+                
+            #line two    
             birth_date = decoded_data['records_decoded'][i]["line2"]["birth_date"]
             sex = decoded_data['records_decoded'][i]["line2"]["sex"]
             expiration_date = decoded_data['records_decoded'][i]["line2"]["expiration_date"]
@@ -71,3 +73,45 @@ def encodeSequence(decoded_data, n_value, input, test = "None"):
             
             if (test != "None"):
                 TestMRTD()
+                
+def testEncodeMRZ_perf(json_file): 
+    n_value = [100, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000]
+    value = []
+    
+    file = open(json_file)
+    decoded_data = json.load(file)
+   
+    for input in range(len(n_value)):   #without tests
+        start = time.perf_counter()
+        encodeSequence(decoded_data, n_value, input)
+        end = time.perf_counter()
+        no_test_time = end - start
+
+        start = time.perf_counter()
+        encodeSequence(decoded_data, n_value, input, test = TestMRTD())
+        end = time.perf_counter()
+
+        with_test_time = end - start
+        value.append([n_value[input], no_test_time, with_test_time])
+
+    return value
+
+def writeCSVDecode():
+    header = ['# of lines read', 'Execution time w/o tests', 'Execution time w/ tests']
+    data = testDecodeMRZ_perf("records_encoded.json")
+    with open('decoded.csv', 'w', encoding='UTF8') as file:
+        writer = csv.writer(file)
+        writer.writerow(header)
+        writer.writerows(data)
+
+def writeCSVEncode():
+    header = ['# of lines read', 'Execution time w/o tests', 'Execution time w/ tests']
+    data = testEncodeMRZ_perf("records_decoded.json")
+
+    with open('encoded.csv', 'w', encoding='UTF8') as file:
+        writer = csv.writer(file)
+        writer.writerow(header)
+        writer.writerows(data)
+
+writeCSVDecode()
+writeCSVEncode()
