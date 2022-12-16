@@ -93,7 +93,7 @@ class TestMRTD(unittest.TestCase):
             mock_get_MRTDInfo.return_value = data
 
             self.assertEqual(
-                  "P<UTOERIKSSON<<ANNA<MARIA<<<<<<<<<<<<<<<<<<<\nL898902C36UTO7408122F1204159ZE184226B<<<<<<1", encodeData("L898902C3"))
+                  "P<UTOERIKSSON<<ANNA<MARIA<<<<<<<<<<<<<<<<<<<\nL898902C36UTO7408122F1204159ZE184226B<<<<<<1", encode("L898902C3"))
             
             return()
       
