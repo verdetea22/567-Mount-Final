@@ -22,7 +22,7 @@ def scanMRZ():
       
       #first_line = ""
       #second_line = ""
-      #return ( first_line + "+" + second_line )
+      #return ( first_line + ";" + second_line )
       
       #reads the document, scans the two lines of information
       
@@ -66,6 +66,7 @@ def decodeMRZ(MRZ_s):
       }
       
       # seperate travel info into two seperate variables
+      #Each line of the input file contains both lines separated by a semicolon
       first_line = list(MRZ_s.split(";"))[0]
       second_line = list(MRZ_s.split(";"))[1]
       
