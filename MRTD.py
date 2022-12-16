@@ -71,25 +71,25 @@ def decodeMRZ(MRZ_s):
       
       # create lists, filter out "<" characters 
       first_line_list = list(filter(None, list(first_line.split("<"))))
-      second_line_list = list(filter(None, list(second_line.split("<"))))
       
       #populate first string list with information 
       info_fields["document_type"] = first_line_list[0]
       info_fields["last_name"]= first_line_list[1][3::]
       info_fields["first_name"] = first_line_list[2]
-      info_fields["middle_name"] = first_line_list[3]
+      if (len(first_line_list) > 3):
+        info_fields["middle_name"] = first_line_list[3]
       
       #populate second list with information // checkdigits appear between every few fields
-      info_fields["passport_number"] = second_line_list[0:9]
-      info_fields["checkdigit1"] = second_line_list[9]
-      info_fields["issuing_country"]= second_line_list[10:13]
-      info_fields["birth_date"]= second_line_list[13:19]
-      info_fields["checkdigit2"] = second_line_list[19]
-      info_fields["sex"] = second_line_list[20]
-      info_fields["expiration_date"] = second_line_list[21:27]
-      info_fields["checkdigit3"] = second_line_list[27]
-      info_fields["personal_number"] = second_line_list[28:37]
-      info_fields["checkdigit4"] = second_line_list[43]
+      info_fields["passport_number"] = second_line[0:9]
+      info_fields["checkdigit1"] = second_line[9]
+      info_fields["issuing_country"]= second_line[10:13]
+      info_fields["birth_date"]= second_line[13:19]
+      info_fields["checkdigit2"] = second_line[19]
+      info_fields["sex"] = second_line[20]
+      info_fields["expiration_date"] = second_line[21:27]
+      info_fields["checkdigit3"] = second_line[27]
+      info_fields["personal_number"] = second_line[28:37]
+      info_fields["checkdigit4"] = second_line[43]
       
       return info_fields
       
