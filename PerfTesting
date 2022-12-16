@@ -1,6 +1,8 @@
 
-    """For each of the three scenarios described above, write a program to execute the program you developed in Part 2 to measure the execution times to process the first k records of the file for k=100 and k=1000 to 10000 step 1000. Write the execution times to a csv file with the following columns:
-Number of lines read from the beginning of the file,
-Execution time without tests
-Execution time with unit tests assertions in place
-    """
+"""
+Using Python timing libraries:
+    - use two .jsons measure the execution times to process a certain amount of records
+    - two files could serve as the input to your decode and encode functions 
+        -measure its performance with different input sizes.
+    - Write the execution times to a csv file
+"""
