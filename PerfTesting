@@ -6,3 +6,10 @@ Using Python timing libraries:
         -measure its performance with different input sizes.
     - Write the execution times to a csv file
 """
+
+from MRTD import *
+import json
+from MTTDtest import TestMRTD
+import time
+import csv 
+
