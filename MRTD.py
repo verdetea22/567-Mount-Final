@@ -25,11 +25,11 @@ def scanMRZ():
       #return ( first_line + "+" + second_line )
       
       #reads the document, scans the two lines of information
-      def scan(MRZ):
-            return "travel information"
       
       return scan(MRZ=any)
 
+def scan(MRZ):
+      return "travel information"
 
 """
 Function 2: Decode the MRTD's two strings and format    
@@ -66,8 +66,8 @@ def decodeMRZ(MRZ_s):
       }
       
       # seperate travel info into two seperate variables
-      first_line = list(MRZ_s.split("+"))[0]
-      second_line = list(MRZ_s.split("+"))[1]
+      first_line = list(MRZ_s.split(";"))[0]
+      second_line = list(MRZ_s.split(";"))[1]
       
       # create lists, filter out "<" characters 
       first_line_list = list(filter(None, list(first_line.split("<"))))
