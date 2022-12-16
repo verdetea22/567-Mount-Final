@@ -48,3 +48,26 @@ def testDecodeMRZ_perf(json_file):
 
 def encodeSequence(decoded_data, n_value, input, test = "None"):
     for i in range(n_value[input]):
+        
+            #following the format of the json file
+            
+            issuing_country = decoded_data['records_decoded'][i]["line1"]["issuing_country"]
+            last_name = decoded_data['records_decoded'][i]["line1"]["last_name"]
+            
+            if " " in decoded_data['records_decoded'][i]["line1"]["given_name"]:
+                first_name = decoded_data['records_decoded'][i]["line1"]["given_name"].split(" ")[0]
+                middle_name = decoded_data['records_decoded'][i]["line1"]["given_name"].split(" ")[1]
+          
+            else:
+                first_name = decoded_data['records_decoded'][i]["line1"]["given_name"]
+                middle_name = ""
+            birth_date = decoded_data['records_decoded'][i]["line2"]["birth_date"]
+            sex = decoded_data['records_decoded'][i]["line2"]["sex"]
+            expiration_date = decoded_data['records_decoded'][i]["line2"]["expiration_date"]
+            passport_number = decoded_data['records_decoded'][i]["line2"]["passport_number"]
+            personal_number = decoded_data['records_decoded'][i]["line2"]["personal_number"]
+            
+            encodeData(issuing_country, first_name, last_name, middle_name, birth_date, sex, expiration_date, passport_number, personal_number)
+            
+            if (test != "None"):
+                TestMRTD()
