@@ -24,14 +24,14 @@ def testDecodeMRZ_perf(json_file):
 
     for input in range(len(n_value)): 
         
-        #no_test_time
+         #without tests
         start = time.perf_counter()
         for i in range(n_value[input]):
             decodeMRZ(encoded_data['records_encoded'][i])
         end = time.perf_counter()
         no_test_time = end - start
 
-        #with_test_time
+        #with assertions
         start = time.perf_counter()
         for i in range(n_value[input]):
             decodeMRZ(encoded_data['records_encoded'][i])
@@ -81,13 +81,16 @@ def testEncodeMRZ_perf(json_file):
     file = open(json_file)
     decoded_data = json.load(file)
    
-    for input in range(len(n_value)):   #without tests
+    for input in range(len(n_value)): 
+        
+        #without tests 
         start = time.perf_counter()
         encodeSequence(decoded_data, n_value, input)
         end = time.perf_counter()
         no_test_time = end - start
 
-        start = time.perf_counter()
+        #with assertions
+        start = time.perf_counter() 
         encodeSequence(decoded_data, n_value, input, test = TestMRTD())
         end = time.perf_counter()
 
